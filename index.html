@@ -5,58 +5,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Questões sobre DOM</title>
+  <title>Questões sobre DOM - parte 2</title>
   <style>
     body {
       background: #ff9;
     }
+    h1, h2, h3, h4, h5, h6 {
+      margin: .4rem;
+    }
+    .flex {
+      display: flex;
+    }
+    .column {
+      flex-flow: column wrap;
+    }
+    .row {
+      flex-flow: row wrap;
+    }
+    .gap {
+      gap: .5rem;
+    }
+    .going-center {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .going-left {
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+    }
+
     .oculto {
       display: none;
-    }
-    #mensagemErro {
-      color: red;
-      margin-top: 10px;
     }
     #img-box {
       height: 50%;
       width: 50%;
     }
+    .buttons {
+      margin: 0 2rem;
+      width: 1rem;
+    }
+    .buttons #moverParaDireitaBtn, .buttons #moverParaEsquerdaBtn {
+      background: #222;
+      border: transparent solid 1.5px;
+      border-radius: .3rem;
+      color: #ff9;
+      cursor: pointer;
+      font-size: 1.5rem;
+      outline: none;
+      transition: all linear 1s;
+    }
+    .idle {
+      opacity: .3;
+    }
+    .qst {
+      min-height: 90vh;
+    }
+    .vanished {
+      display: none;
+    }
+    #qst1 #mensagemErro, #conteudo {
+      color: crimson;
+      text-shadow: 0 0 .5rem red;
+      font-size: 2rem;
+    }
   </style>
 </head>
 <body>
+
+  <div id="controllers" class="flex row going-center gap">
+    <button id="btn-left">voltar</button>
+    <button id="btn-right">avançar</button>
+  </div>
   
-  <div id="qst1" class="qst">
+  <div id="qst1" class="qst vanished flex column going-center">
     <h2>Questão 1</h2>
-    <button id="botaoErro">Mostrar Erro</button>
-    <div id="mensagemErro" class="oculto">O campo deve ser preenchido</div>
-    <input id="mensagemErroInput" type="text" placeholder="digite a mensagem de erro">
+    <div class="flex column going-left gap">
+      <button id="botaoErro">Mostrar Erro</button>
+      <div id="mensagemErro" class="oculto">O campo deve ser preenchido</div>
+      <input id="mensagemErroInput" type="text" placeholder="digite a mensagem de erro">
+    </div>
+    
   </div>
 
-  <div id="qst2" class="qst">
+  <div id="qst2" class="qst vanished flex column going-center">
     <h2>Questão 2</h2>
-    <label for="caixaDeTexto">Digite o texto:</label>
-    <input type="text" id="caixaDeTexto">
-    <button id="botaoExibir">Exibir</button>
-    <div id="conteudo"></div>
+    <div class="flex column going-left gap">
+      <label for="caixaDeTexto">Digite o texto:</label>
+      <input type="text" id="caixaDeTexto">
+      <button id="botaoExibir">Exibir</button>
+      <div id="conteudo"></div>
+    </div>
   </div>
   
-  <div id="qst3" class="qst">
+  <div id="qst3" class="qst vanished flex column going-center">
     <h2>Questão 3</h2>
-    <input type="text" id="n-interacoes" placeholder="número de interações">
-    <input type="text" id="n-visual" placeholder="número de visualizações">
-    <input type="button" id="calc-engaja" value="calcular">
-    <div id="q3-caixa-erros"></div>
-    <div id="resultado-calc"></div>
+    <div class="flex column going-left gap">
+      <input type="text" id="n-interacoes" placeholder="número de interações">
+      <input type="text" id="n-visual" placeholder="número de visualizações">
+      <input type="button" id="calc-engaja" value="calcular">
+      <div id="q3-caixa-erros"></div>
+      <div id="resultado-calc"></div>
+    </div>
   </div>
 
-  <div id="qst4" class="qst">
+  <div id="qst4" class="qst vanished flex column going-center">
     <h2>Questão 4</h2>
-    <input type="file" id="uploadImagem" accept="image/*">
-    <div id="resultado"></div>
-    <input type="button" id="btn-upload" value="carregar imagem">
+    <div class="flex column going-left gap">
+      <input type="file" id="uploadImagem" accept="image/*">
+      <div id="resultado"></div>
+      <input type="button" id="btn-upload" value="carregar imagem">
+    </div>
   </div>
 
-  <div id="qst5" class="qst">
+  <div id="qst5" class="qst vanished flex column going-center">
     <h2>Questão 5</h2>
     <select id="img-dropdown">
       <option value="void">selecionar</option>
@@ -67,39 +131,44 @@
     <div id="img-box"></div>
   </div>
 
-  <div id="qst6" class="qst">
+  <div id="qst6" class="qst vanished flex column going-center">
     <h2>Questão 6</h2>
-    <div>
-      <input type="checkbox" id="facebook" name="redesSociais" value="Facebook">
-      <label for="facebook">Facebook</label>
-    </div>
+    <div class="flex column going-left gap">
+      <div>
+        <input type="checkbox" id="facebook" name="redesSociais" value="Facebook">
+        <label for="facebook">Facebook</label>
+      </div>
 
-    <div>
-      <input type="checkbox" id="twitter" name="redesSociais" value="Twitter">
-      <label for="twitter">Twitter</label>
-    </div>
+      <div>
+        <input type="checkbox" id="twitter" name="redesSociais" value="Twitter">
+        <label for="twitter">Twitter</label>
+      </div>
 
-    <div>
-      <input type="checkbox" id="instagram" name="redesSociais" value="Instagram">
-      <label for="instagram">Instagram</label>
-    </div>
+      <div>
+        <input type="checkbox" id="instagram" name="redesSociais" value="Instagram">
+        <label for="instagram">Instagram</label>
+      </div>
 
-    <div>
-      <input type="checkbox" id="linkedin" name="redesSociais" value="LinkedIn">
-      <label for="linkedin">LinkedIn</label>
-    </div>
+      <div>
+        <input type="checkbox" id="linkedin" name="redesSociais" value="LinkedIn">
+        <label for="linkedin">LinkedIn</label>
+      </div>
 
-    <div>
-      <input type="checkbox" id="tiktok" name="redesSociais" value="TikTok">
-      <label for="tiktok">TikTok</label>
+      <div>
+        <input type="checkbox" id="tiktok" name="redesSociais" value="TikTok">
+        <label for="tiktok">TikTok</label>
+      </div>
     </div>
-
-    <div class= "oculto" id="mensagemErroRedesSociais"></div>
-    <div id="redesSelecionadas"></div>
-    <button type="button" id="enviarBtn">Enviar Seleção</button>
+    
+    <div class="flex column gap">
+      <div class= "oculto" id="mensagemErroRedesSociais"></div>
+      <div id="redesSelecionadas"></div>
+      <button type="button" id="enviarBtn">Enviar Seleção</button>
+    </div>
+    
   </div>
 
-  <div id="qst7" class="qst">
+  <div id="qst7" class="qst vanished flex column going-center">
     <h2>Questão 7, 8 e 9</h2>
     <div id="q7-error-msg"></div>
     <input type="text" id="q7-hashtag-input" placeholder="digitar hashtag">
@@ -108,13 +177,13 @@
     <select id="q7-hashtags" size="5"></select>
   </div>
 
-  <div id="qst10" class="qst">
-    <h2>Questão 10</h2>
-    <h1>Mover Ativos Financeiros entre Carteiras</h1>
+  <div id="qst10" class="qst vanished flex column going-center">
+    <h2>Questão 10 e 11</h2>
+    <h3>Mover Ativos Financeiros entre Carteiras</h3>
     
-    <div id="container">
+    <div id="container" class="flex row">
 
-      <div>
+      <div class="flex column gap">
         <label for="ativosDisponiveis">Ativos Disponíveis:</label>
         <select id="ativosDisponiveis" size="10" multiple>
           <option value="AAPL">Apple (AAPL)</option>
@@ -130,12 +199,12 @@
         </select>
       </div>
 
-      <div class="buttons">
+      <div class="buttons flex row gap">
         <button id="moverParaDireitaBtn">></button>
         <button id="moverParaEsquerdaBtn">&lt;</button>
       </div>
 
-      <div>
+      <div class="flex column gap">
         <label for="carteiraInvestimentos">Carteira deInvestimentos:</label>
         <select id="carteiraInvestimentos" size="10" multiple></select>
       </div>
@@ -147,13 +216,44 @@
     
     const getById = (id) => {return document.getElementById(id)}
 
+    const slide = (btnLeft, btnRight, targetTag) => {
+      let currentSlide = -1
+      console.log(btnLeft, btnRight, targetTag)
+
+      btnRight.addEventListener('click', () => {
+        if(currentSlide < targetTag.length) {
+          currentSlide++
+          for(let i = 0; i < targetTag.length; i++) {
+            if(i === currentSlide) {
+              targetTag[i].classList.remove('vanished')
+            } else {
+              targetTag[i].classList.add('vanished')
+            }
+          }
+        }
+      })
+      
+      btnLeft.addEventListener('click', () => {
+        if(currentSlide >= 1) {
+          currentSlide--
+          for(let i = 0; i < targetTag.length; i++) {
+            if(i === currentSlide) {
+              targetTag[i].classList.remove('vanished')
+            } else {
+              targetTag[i].classList.add('vanished')
+            }
+          }
+        }
+      })
+    }
+
     class Question1 {
-      init(btn, hostId, inputId) {
+      showError(btn, hostId, inputId) {
         btn.addEventListener('click', function() {
           console.log('clique')
           const host = getById(hostId)
           if (getById(inputId).value.trim() === '') {
-            host.textContent = 'Campo não pode estar vazio!'
+            host.textContent = '❌'
           } else {
             host.textContent = getById(inputId).value
           }
@@ -171,7 +271,7 @@
       }
 
       exibirConteudo() {
-        this.foreignerInstance.init(getById('botaoExibir'), 'conteudo', 'caixaDeTexto')
+        this.foreignerInstance.showError(getById('botaoExibir'), 'conteudo', 'caixaDeTexto')
       }
       
     }
@@ -180,7 +280,7 @@
       calculateEngagement(inputA, inputB, boxException, boxResult, btnTrigger) {
         btnTrigger.addEventListener('click', () => {
           if (inputA.value === '' || inputB.value === '' || isNaN(inputA.value) || isNaN(inputB.value)) {
-            boxException.textContent = 'foram detectados campos não numéricos, corriga os dados!'
+            boxException.textContent = '❌ foram detectados campos não numéricos, corriga os dados! ❌'
             setTimeout(() => {
               boxException.textContent = ''
             }, 3000)
@@ -318,6 +418,31 @@
       }
     }
 
+    class Question11 {
+      validateActions(walletAvailable, walletInvestment, rightBtn, leftBtn) {
+        setInterval(() => {
+          const available = Array.from(getById(walletAvailable).selectedOptions)
+          if (available.length === 0) {
+            getById(rightBtn).setAttribute('disabled', '')
+            getById(rightBtn).classList.add('idle')
+          } else {
+            getById(rightBtn).removeAttribute('disabled')
+            getById(rightBtn).classList.remove('idle')
+          }
+          const investment = Array.from(getById(walletInvestment).selectedOptions)
+          if (investment.length === 0) {
+            getById(leftBtn).setAttribute('disabled', '')
+            getById(leftBtn).classList.add('idle')
+          } else {
+            getById(leftBtn).removeAttribute('disabled')
+            getById(leftBtn).classList.remove('idle')
+          }
+        }, 100)
+      }
+    }
+
+    slide(getById('btn-left'), getById('btn-right'), document.querySelectorAll('.qst'))
+
     const q1 = new Question1()
     const q2 = new Question2(q1)
     const q3 = new Question3()
@@ -326,8 +451,9 @@
     const q6 = new Question6()
     const q789 = new Questions789()
     const q10 = new Question10()
+    const q11 = new Question11()
     
-    q1.init(getById('botaoErro'), 'mensagemErro', 'mensagemErroInput')
+    q1.showError(getById('botaoErro'), 'mensagemErro', 'mensagemErroInput')
     q2.exibirConteudo()
     q3.calculateEngagement(getById('n-interacoes'), getById('n-visual'), getById('q3-caixa-erros'), getById('resultado-calc'),getById('calc-engaja'))
     q4.manageImage('uploadImagem', 'btn-upload', 'resultado')
@@ -336,6 +462,7 @@
     q789.createHashTags('q7-hashtags', 'q7-hashtag-input', 'q7-error-msg', 'q7-send-hashtag-btn')
     q789.deleteHashtag('q7-del-hashtag-btn', 'q7-hashtags', 'q7-error-msg')
     q10.transferActives("ativosDisponiveis", "carteiraInvestimentos", "moverParaDireitaBtn", "moverParaEsquerdaBtn")
+    q11.validateActions("ativosDisponiveis", "carteiraInvestimentos", "moverParaDireitaBtn", "moverParaEsquerdaBtn")
     
   </script>
   
