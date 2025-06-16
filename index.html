@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questões sobre DOM</title>
+  <style>
+    body {
+      background: #ff9;
+    }
+    .oculto {
+      display: none;
+    }
+    #mensagemErro {
+      color: red;
+      margin-top: 10px;
+    }
+    #img-box {
+      height: 50%;
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="qst1" class="qst">
+    <h2>Questão 1</h2>
+    <button id="botaoErro">Mostrar Erro</button>
+    <div id="mensagemErro" class="oculto">O campo deve ser preenchido</div>
+    <input id="mensagemErroInput" type="text" placeholder="digite a mensagem de erro">
+  </div>
+
+  <div id="qst2" class="qst">
+    <h2>Questão 2</h2>
+    <label for="caixaDeTexto">Digite o texto:</label>
+    <input type="text" id="caixaDeTexto">
+    <button id="botaoExibir">Exibir</button>
+    <div id="conteudo"></div>
+  </div>
+  
+  <div id="qst3" class="qst">
+    <h2>Questão 3</h2>
+    <input type="text" id="n-interacoes" placeholder="número de interações">
+    <input type="text" id="n-visual" placeholder="número de visualizações">
+    <input type="button" id="calc-engaja" value="calcular">
+    <div id="q3-caixa-erros"></div>
+    <div id="resultado-calc"></div>
+  </div>
+
+  <div id="qst4" class="qst">
+    <h2>Questão 4</h2>
+    <input type="file" id="uploadImagem" accept="image/*">
+    <div id="resultado"></div>
+    <input type="button" id="btn-upload" value="carregar imagem">
+  </div>
+
+  <div id="qst5" class="qst">
+    <h2>Questão 5</h2>
+    <select id="img-dropdown">
+      <option value="void">selecionar</option>
+      <option value="https://raw.githubusercontent.com/lucasFarias072/my-images/refs/heads/main/lista-infos-malwares.png">Ataques à rede de computadores</option>
+      <option value="https://raw.githubusercontent.com/lucasFarias072/my-images/refs/heads/main/atividade-modelagem-comparativa-calculo-rmsd.png">ChimeraX - cálculo RSDM de estrutura</option>
+      <option value="https://raw.githubusercontent.com/lucasFarias072/my-images/refs/heads/main/uci-dataset-gallstone-decision-tree-simplified.png">Árvore de decisão python</option>
+    </select>
+    <div id="img-box"></div>
+  </div>
+
+  <div id="qst6" class="qst">
+    <h2>Questão 6</h2>
+    <div>
+      <input type="checkbox" id="facebook" name="redesSociais" value="Facebook">
+      <label for="facebook">Facebook</label>
+    </div>
+
+    <div>
+      <input type="checkbox" id="twitter" name="redesSociais" value="Twitter">
+      <label for="twitter">Twitter</label>
+    </div>
+
+    <div>
+      <input type="checkbox" id="instagram" name="redesSociais" value="Instagram">
+      <label for="instagram">Instagram</label>
+    </div>
+
+    <div>
+      <input type="checkbox" id="linkedin" name="redesSociais" value="LinkedIn">
+      <label for="linkedin">LinkedIn</label>
+    </div>
+
+    <div>
+      <input type="checkbox" id="tiktok" name="redesSociais" value="TikTok">
+      <label for="tiktok">TikTok</label>
+    </div>
+
+    <div class= "oculto" id="mensagemErroRedesSociais"></div>
+    <div id="redesSelecionadas"></div>
+    <button type="button" id="enviarBtn">Enviar Seleção</button>
+  </div>
+
+  <div id="qst7" class="qst">
+    <h2>Questão 7, 8 e 9</h2>
+    <div id="q7-error-msg"></div>
+    <input type="text" id="q7-hashtag-input" placeholder="digitar hashtag">
+    <input type="button" id="q7-send-hashtag-btn" value="add hashtag">
+    <input type="button" id="q7-del-hashtag-btn" value="remover hashtag selecionada">
+    <select id="q7-hashtags" size="5"></select>
+  </div>
+
+  <div id="qst10" class="qst">
+    <h2>Questão 10</h2>
+    <h1>Mover Ativos Financeiros entre Carteiras</h1>
+    
+    <div id="container">
+
+      <div>
+        <label for="ativosDisponiveis">Ativos Disponíveis:</label>
+        <select id="ativosDisponiveis" size="10" multiple>
+          <option value="AAPL">Apple (AAPL)</option>
+          <option value="GOOGL">Google (GOOGL)</option>
+          <option value="AMZN">Amazon (AMZN)</option>
+          <option value="MSFT">Microsoft (MSFT)</option>
+          <option value="TSLA">Tesla (TSLA)</option>
+          <option value="BRK.B">Berkshire Hathaway (BRK.B)</option>
+          <option value="FB">Meta (FB)</option>
+          <option value="V">Visa (V)</option>
+          <option value="JNJ">Johnson & Johnson (JNJ)</option>
+          <option value="WMT">Walmart (WMT)</option>
+        </select>
+      </div>
+
+      <div class="buttons">
+        <button id="moverParaDireitaBtn">></button>
+        <button id="moverParaEsquerdaBtn">&lt;</button>
+      </div>
+
+      <div>
+        <label for="carteiraInvestimentos">Carteira deInvestimentos:</label>
+        <select id="carteiraInvestimentos" size="10" multiple></select>
+      </div>
+
+    </div>
+  </div>
+  
+  <script>
+    
+    const getById = (id) => {return document.getElementById(id)}
+
+    class Question1 {
+      init(btn, hostId, inputId) {
+        btn.addEventListener('click', function() {
+          console.log('clique')
+          const host = getById(hostId)
+          if (getById(inputId).value.trim() === '') {
+            host.textContent = 'Campo não pode estar vazio!'
+          } else {
+            host.textContent = getById(inputId).value
+          }
+          host.classList.remove('oculto')
+            setTimeout(function() {
+              host.classList.add('oculto')
+            }, 3000)
+          })
+      }
+    }
+
+    class Question2 {
+      constructor(foreignerInstance) {
+        this.foreignerInstance = foreignerInstance
+      }
+
+      exibirConteudo() {
+        this.foreignerInstance.init(getById('botaoExibir'), 'conteudo', 'caixaDeTexto')
+      }
+      
+    }
+
+    class Question3 {
+      calculateEngagement(inputA, inputB, boxException, boxResult, btnTrigger) {
+        btnTrigger.addEventListener('click', () => {
+          if (inputA.value === '' || inputB.value === '' || isNaN(inputA.value) || isNaN(inputB.value)) {
+            boxException.textContent = 'foram detectados campos não numéricos, corriga os dados!'
+            setTimeout(() => {
+              boxException.textContent = ''
+            }, 3000)
+          } else {
+            boxResult.textContent = `Taxa de engajamento = ${(inputA.value / inputB.value) * 100}%`
+          }
+        })
+      }
+    }
+
+    class Question4 {
+      manageImage(imgTag, triggerBtn, imageBox) {
+        getById(triggerBtn).addEventListener('click', () => {
+          const images = getById(imgTag).files[0]
+          const btn = getById(triggerBtn)
+
+          if (images) {
+              const img = document.createElement('img')
+              img.setAttribute('src', URL.createObjectURL(images))
+              getById(imageBox).appendChild(img)
+          }
+        })
+      }
+    }
+
+    class Question5 {
+      loadImageByDropdown(dropdownId, imgBox) {
+        getById(dropdownId).addEventListener('change', () => {
+          getById(imgBox).innerHTML = ''
+          const img = document.createElement('img')
+          img.setAttribute('alt', 'sem imagem pra visualizar 🔎')
+          img.setAttribute('src', getById(dropdownId).value)
+          getById(imgBox).appendChild(img)
+        })
+      }
+    }
+
+    class Question6 {
+      selectFavSocialMedia(selectTags, errorBox, btnTrigger) {
+        const allCheckboxes = document.getElementsByName(selectTags)
+        let selected = []
+        getById(btnTrigger).addEventListener('click', () => {
+          allCheckboxes.forEach(tag => {
+            if (tag.checked) selected.push(tag)
+          })
+
+          getById(errorBox).classList.remove('oculto')
+
+          if (selected.length != 0) {
+            getById(errorBox).textContent = 'Redes sociais selecionadas: '
+            for(const msg of selected) {
+              getById(errorBox).textContent += `${msg.value} `
+            }
+          } else {
+            getById(errorBox).textContent = 'Não há checkboxes marcados! Marque alguma rede social.'
+          }
+
+          setTimeout(() => {
+            getById(errorBox).classList.add('oculto')
+          }, 3000)
+
+          selected = []
+
+        })
+
+      }
+    }
+
+    class Questions789 {
+      createHashTags(whereTag, inputTag, errorTag, triggerBtn) {
+        getById(triggerBtn).addEventListener('click', () => {
+          let repeated = new Set()
+        
+          let options = getById(whereTag).childNodes
+          options.forEach(option => repeated.add(option.textContent))
+          const inputValue = getById(inputTag).value
+          
+          if (!repeated.has(inputValue) && inputValue.trim() !== '' && inputValue.length >= 2 && options.length < 5) {
+            const newOption = document.createElement('option')
+            newOption.value = getById(inputTag).value.substring(1, getById(inputTag).value.length)
+            newOption.textContent = getById(inputTag).value
+            getById(whereTag).appendChild(newOption)
+          }
+          else {
+            getById(errorTag).textContent = 'Hashtag não cumpre requisitos ou excede limite de visualizações!'
+            setTimeout(() => {
+              getById(errorTag).textContent = ''
+            }, 3000)
+          }
+        })
+      }
+
+      deleteHashtag(removeBtn, whereTag, errorTag) {
+        getById(removeBtn).addEventListener('click', () => {
+          const dropdown = getById(whereTag)
+          const dropdownOptions = dropdown.selectedOptions
+          
+          if (dropdownOptions.length === 0) {
+            getById(errorTag).textContent = 'Não há hashtags selecionadas! Selecione alguma'
+            setTimeout(() => {
+              getById(errorTag).textContent = ''
+            }, 3000)
+          } else {
+            dropdown.removeChild(dropdownOptions[0])
+          }
+        })
+      }
+    }
+
+    class Question10 {
+      transferActives(walletAvailable, walletInvestment, rightBtn, leftBtn) {
+        const available = getById(walletAvailable)
+        const investment = getById(walletInvestment)
+
+        getById(rightBtn).addEventListener('click', () => {
+          let availableSelected = Array.from(available.selectedOptions)
+          availableSelected.forEach(i => {
+            investment.appendChild(i)
+          })
+          availableSelected.forEach(i => {
+            available.removeChild(i)
+          })
+        })
+
+        getById(leftBtn).addEventListener('click', () => {
+          let investmentSelected = Array.from(investment.selectedOptions)
+          investmentSelected.forEach(i => {
+            available.appendChild(i)
+          })
+          investmentSelected.forEach(i => {
+            investment.removeChild(i)
+          })
+        })
+
+      }
+    }
+
+    const q1 = new Question1()
+    const q2 = new Question2(q1)
+    const q3 = new Question3()
+    const q4 = new Question4()
+    const q5 = new Question5()
+    const q6 = new Question6()
+    const q789 = new Questions789()
+    const q10 = new Question10()
+    
+    q1.init(getById('botaoErro'), 'mensagemErro', 'mensagemErroInput')
+    q2.exibirConteudo()
+    q3.calculateEngagement(getById('n-interacoes'), getById('n-visual'), getById('q3-caixa-erros'), getById('resultado-calc'),getById('calc-engaja'))
+    q4.manageImage('uploadImagem', 'btn-upload', 'resultado')
+    q5.loadImageByDropdown('img-dropdown', 'img-box')
+    q6.selectFavSocialMedia('redesSociais', 'mensagemErroRedesSociais', 'enviarBtn')
+    q789.createHashTags('q7-hashtags', 'q7-hashtag-input', 'q7-error-msg', 'q7-send-hashtag-btn')
+    q789.deleteHashtag('q7-del-hashtag-btn', 'q7-hashtags', 'q7-error-msg')
+    q10.transferActives("ativosDisponiveis", "carteiraInvestimentos", "moverParaDireitaBtn", "moverParaEsquerdaBtn")
+    
+  </script>
+  
+</body>
+</html>
